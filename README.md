@@ -13,6 +13,6 @@ Enter full path to list files:
 ```
 This returns an Excel File with the required folder's content saved at the same location as the python script.
 
-Name	Path	hyperlink
+Name  |	Path	| hyperlink
 
 The Excel filename has the timestamp of when the file was created.
