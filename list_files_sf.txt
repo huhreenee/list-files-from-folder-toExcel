@@ -1,0 +1,13 @@
+import os
+import pandas as pd
+from time import time
+import datetime
+
+currentDT = datetime.datetime.now()
+ts = currentDT.strftime("%Y_%m_%d_%H_%M_%S")
+directory = input("Enter full path to list files:")
+
+result = [(file, os.path.join(top, file)) for top, dirs, files in os.walk(directory) for file in files]
+df = pd.DataFrame(result, columns =['Name', 'Path'])
+
+df.to_excel("list_of_files_"+ts+".xlsx", index=False)
