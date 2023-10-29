@@ -26,11 +26,22 @@ import os
 import pandas as pd
 from time import time
 import datetime
-
+#timestamp of the time the file was executed 
 currentDT = datetime.datetime.now()
 ts = currentDT.strftime("%Y_%m_%d_%H_%M_%S")
+
 directory = input("Enter full path to list files:")
+
+
 result = [(file, os.path.join(top, file)) for top, dirs, files in os.walk(directory) for file in files]
+
 df = pd.DataFrame(result, columns =['Name', 'Path'])
 
+# hyperlink to filepath
+def make_hyperlink(value):
+    return '=HYPERLINK("%s", "%s")' % (value, "Open" )
+
+df['hyperlink'] = df['Path'].apply(make_hyperlink)
+
+# return in excel
 df.to_excel("list_of_files_"+ts+".xlsx", index=False)
